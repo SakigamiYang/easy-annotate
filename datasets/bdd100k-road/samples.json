@@ -1,0 +1,809 @@
+{
+  "source": "dronefreak/BDD100K",
+  "split": "val",
+  "seed": 42,
+  "images": [
+    "b53a1501-745a59ef.jpg",
+    "b6673f98-d6661115.jpg",
+    "be3e9c45-d47775f3.jpg",
+    "b57c8f5a-b427a4b7.jpg",
+    "bda35230-332be7ac.jpg",
+    "b433534e-ff3646aa.jpg",
+    "b2c542e3-02f579a6.jpg",
+    "b29806ee-e89a39a6.jpg",
+    "b26dddb5-28e4a05f.jpg",
+    "b39572b6-ad240c2b.jpg",
+    "bbf7e280-5abb97f2.jpg",
+    "b518f838-62048659.jpg",
+    "b4b2f8e1-18accb75.jpg",
+    "b6592e95-0eaf85a5.jpg",
+    "bc7bc1e5-2c8a6abe.jpg",
+    "bc7e7e2c-1714d279.jpg",
+    "b4e86b41-b15ff7cb.jpg",
+    "b9d24e81-a9679e2a.jpg",
+    "b61aec41-fe792c56.jpg",
+    "be273f87-7aca9df7.jpg",
+    "b7457987-06803d89.jpg",
+    "be362fff-99b5dd8b.jpg",
+    "b22a4d9f-73cc8810.jpg",
+    "b940c3b2-149d028e.jpg",
+    "bd5a0062-b4ca75f1.jpg",
+    "b48c7b5f-49fec7f1.jpg",
+    "bd5e7386-b01b09fb.jpg",
+    "b88a00df-65e5355b.jpg",
+    "b3c672a8-b7b886ae.jpg",
+    "b3d6c39a-a396c692.jpg",
+    "b5d63e8d-061c1a6f.jpg",
+    "bd51fb57-1ac69b0a.jpg",
+    "b7831880-0327e785.jpg",
+    "b555790d-59bad5ab.jpg",
+    "bbc06e30-aa1ed8ea.jpg",
+    "b9ed70c8-edc3834b.jpg",
+    "b454034b-d84dae74.jpg",
+    "b294386c-24ddd0c3.jpg",
+    "b1d0091f-f2c2d2ae.jpg",
+    "b4863201-6521c146.jpg",
+    "b7d277b3-fc03ae80.jpg",
+    "b8afaffa-5ec67bbb.jpg",
+    "bcfdd6af-698c03e3.jpg",
+    "bbc64a91-b3bf5a63.jpg",
+    "b51daa04-f4e62d2f.jpg",
+    "b3875c8d-cc4081eb.jpg",
+    "b6818d65-6cfd37c8.jpg",
+    "bc470fd9-1cbc318c.jpg",
+    "b775af1c-b71a7f85.jpg",
+    "b4253085-9f907156.jpg",
+    "b35c8e3d-bc2c104b.jpg",
+    "bbfc1b2e-43566392.jpg",
+    "b6579e76-4fee87d1.jpg",
+    "b21bfb83-ea32f716.jpg",
+    "b9047aca-41787983.jpg",
+    "b5d6e647-44af4f17.jpg",
+    "b2f3d83a-1effdb49.jpg",
+    "bdd6d823-659f71fd.jpg",
+    "b842809b-9b11bab7.jpg",
+    "b4ba0552-53249a02.jpg",
+    "b4b68779-1c75351a.jpg",
+    "be3301b2-9bb342d3.jpg",
+    "bdba96db-510677bf.jpg",
+    "baf019d9-da5f9843.jpg",
+    "bd7cb9e1-eb5b2227.jpg",
+    "b61212a0-3ddd6209.jpg",
+    "bba45236-0fffd225.jpg",
+    "bd442c6f-16ff171d.jpg",
+    "b1d0a191-28f0e779.jpg",
+    "b71bf87d-894c1a21.jpg",
+    "b84146a1-a5f588ef.jpg",
+    "b82366c4-3fb8da58.jpg",
+    "bdaeda37-dfe74a95.jpg",
+    "b603f785-de5db004.jpg",
+    "b557283b-51959094.jpg",
+    "bca3720a-3423755f.jpg",
+    "bd290539-038f7b75.jpg",
+    "bdde507b-1ce1ac20.jpg",
+    "bb820c34-c959c253.jpg",
+    "b4c0a877-dff9f7bb.jpg",
+    "b5b78553-b7c03da2.jpg",
+    "b255cd6c-2f889586.jpg",
+    "b7bbb1fe-1cec6316.jpg",
+    "be1ed8ce-38edbe34.jpg",
+    "b9b53753-91a5d5f8.jpg",
+    "b5b02b31-753a8a4a.jpg",
+    "b90f7487-7fb37cf4.jpg",
+    "b6ffe7bd-1e0d5145.jpg",
+    "bde48e24-e9aba0dc.jpg",
+    "b3d4554c-86182e6e.jpg",
+    "b4e3816e-6cd8a1fe.jpg",
+    "b3e72283-34ebe4f5.jpg",
+    "b8d24edf-70279ee0.jpg",
+    "b3bc36c8-03cb07d2.jpg",
+    "b48c7b5f-ae58463a.jpg",
+    "b7ea55c1-8385ec70.jpg",
+    "b8c0457f-d7a1d2b7.jpg",
+    "b49a1b50-186fb520.jpg",
+    "b6b9069a-4908df6a.jpg",
+    "b6e4a55e-4a7068f1.jpg"
+  ],
+  "samples": [
+    {
+      "id": 0,
+      "image": "b53a1501-745a59ef.jpg",
+      "label": "b53a1501-745a59ef.txt",
+      "raw_label": "b53a1501-745a59ef.json",
+      "boxes": 23
+    },
+    {
+      "id": 1,
+      "image": "b6673f98-d6661115.jpg",
+      "label": "b6673f98-d6661115.txt",
+      "raw_label": "b6673f98-d6661115.json",
+      "boxes": 22
+    },
+    {
+      "id": 2,
+      "image": "be3e9c45-d47775f3.jpg",
+      "label": "be3e9c45-d47775f3.txt",
+      "raw_label": "be3e9c45-d47775f3.json",
+      "boxes": 19
+    },
+    {
+      "id": 3,
+      "image": "b57c8f5a-b427a4b7.jpg",
+      "label": "b57c8f5a-b427a4b7.txt",
+      "raw_label": "b57c8f5a-b427a4b7.json",
+      "boxes": 23
+    },
+    {
+      "id": 4,
+      "image": "bda35230-332be7ac.jpg",
+      "label": "bda35230-332be7ac.txt",
+      "raw_label": "bda35230-332be7ac.json",
+      "boxes": 15
+    },
+    {
+      "id": 5,
+      "image": "b433534e-ff3646aa.jpg",
+      "label": "b433534e-ff3646aa.txt",
+      "raw_label": "b433534e-ff3646aa.json",
+      "boxes": 24
+    },
+    {
+      "id": 6,
+      "image": "b2c542e3-02f579a6.jpg",
+      "label": "b2c542e3-02f579a6.txt",
+      "raw_label": "b2c542e3-02f579a6.json",
+      "boxes": 22
+    },
+    {
+      "id": 7,
+      "image": "b29806ee-e89a39a6.jpg",
+      "label": "b29806ee-e89a39a6.txt",
+      "raw_label": "b29806ee-e89a39a6.json",
+      "boxes": 17
+    },
+    {
+      "id": 8,
+      "image": "b26dddb5-28e4a05f.jpg",
+      "label": "b26dddb5-28e4a05f.txt",
+      "raw_label": "b26dddb5-28e4a05f.json",
+      "boxes": 12
+    },
+    {
+      "id": 9,
+      "image": "b39572b6-ad240c2b.jpg",
+      "label": "b39572b6-ad240c2b.txt",
+      "raw_label": "b39572b6-ad240c2b.json",
+      "boxes": 22
+    },
+    {
+      "id": 10,
+      "image": "bbf7e280-5abb97f2.jpg",
+      "label": "bbf7e280-5abb97f2.txt",
+      "raw_label": "bbf7e280-5abb97f2.json",
+      "boxes": 7
+    },
+    {
+      "id": 11,
+      "image": "b518f838-62048659.jpg",
+      "label": "b518f838-62048659.txt",
+      "raw_label": "b518f838-62048659.json",
+      "boxes": 4
+    },
+    {
+      "id": 12,
+      "image": "b4b2f8e1-18accb75.jpg",
+      "label": "b4b2f8e1-18accb75.txt",
+      "raw_label": "b4b2f8e1-18accb75.json",
+      "boxes": 8
+    },
+    {
+      "id": 13,
+      "image": "b6592e95-0eaf85a5.jpg",
+      "label": "b6592e95-0eaf85a5.txt",
+      "raw_label": "b6592e95-0eaf85a5.json",
+      "boxes": 16
+    },
+    {
+      "id": 14,
+      "image": "bc7bc1e5-2c8a6abe.jpg",
+      "label": "bc7bc1e5-2c8a6abe.txt",
+      "raw_label": "bc7bc1e5-2c8a6abe.json",
+      "boxes": 15
+    },
+    {
+      "id": 15,
+      "image": "bc7e7e2c-1714d279.jpg",
+      "label": "bc7e7e2c-1714d279.txt",
+      "raw_label": "bc7e7e2c-1714d279.json",
+      "boxes": 39
+    },
+    {
+      "id": 16,
+      "image": "b4e86b41-b15ff7cb.jpg",
+      "label": "b4e86b41-b15ff7cb.txt",
+      "raw_label": "b4e86b41-b15ff7cb.json",
+      "boxes": 31
+    },
+    {
+      "id": 17,
+      "image": "b9d24e81-a9679e2a.jpg",
+      "label": "b9d24e81-a9679e2a.txt",
+      "raw_label": "b9d24e81-a9679e2a.json",
+      "boxes": 15
+    },
+    {
+      "id": 18,
+      "image": "b61aec41-fe792c56.jpg",
+      "label": "b61aec41-fe792c56.txt",
+      "raw_label": "b61aec41-fe792c56.json",
+      "boxes": 31
+    },
+    {
+      "id": 19,
+      "image": "be273f87-7aca9df7.jpg",
+      "label": "be273f87-7aca9df7.txt",
+      "raw_label": "be273f87-7aca9df7.json",
+      "boxes": 8
+    },
+    {
+      "id": 20,
+      "image": "b7457987-06803d89.jpg",
+      "label": "b7457987-06803d89.txt",
+      "raw_label": "b7457987-06803d89.json",
+      "boxes": 7
+    },
+    {
+      "id": 21,
+      "image": "be362fff-99b5dd8b.jpg",
+      "label": "be362fff-99b5dd8b.txt",
+      "raw_label": "be362fff-99b5dd8b.json",
+      "boxes": 13
+    },
+    {
+      "id": 22,
+      "image": "b22a4d9f-73cc8810.jpg",
+      "label": "b22a4d9f-73cc8810.txt",
+      "raw_label": "b22a4d9f-73cc8810.json",
+      "boxes": 18
+    },
+    {
+      "id": 23,
+      "image": "b940c3b2-149d028e.jpg",
+      "label": "b940c3b2-149d028e.txt",
+      "raw_label": "b940c3b2-149d028e.json",
+      "boxes": 21
+    },
+    {
+      "id": 24,
+      "image": "bd5a0062-b4ca75f1.jpg",
+      "label": "bd5a0062-b4ca75f1.txt",
+      "raw_label": "bd5a0062-b4ca75f1.json",
+      "boxes": 9
+    },
+    {
+      "id": 25,
+      "image": "b48c7b5f-49fec7f1.jpg",
+      "label": "b48c7b5f-49fec7f1.txt",
+      "raw_label": "b48c7b5f-49fec7f1.json",
+      "boxes": 16
+    },
+    {
+      "id": 26,
+      "image": "bd5e7386-b01b09fb.jpg",
+      "label": "bd5e7386-b01b09fb.txt",
+      "raw_label": "bd5e7386-b01b09fb.json",
+      "boxes": 20
+    },
+    {
+      "id": 27,
+      "image": "b88a00df-65e5355b.jpg",
+      "label": "b88a00df-65e5355b.txt",
+      "raw_label": "b88a00df-65e5355b.json",
+      "boxes": 20
+    },
+    {
+      "id": 28,
+      "image": "b3c672a8-b7b886ae.jpg",
+      "label": "b3c672a8-b7b886ae.txt",
+      "raw_label": "b3c672a8-b7b886ae.json",
+      "boxes": 9
+    },
+    {
+      "id": 29,
+      "image": "b3d6c39a-a396c692.jpg",
+      "label": "b3d6c39a-a396c692.txt",
+      "raw_label": "b3d6c39a-a396c692.json",
+      "boxes": 32
+    },
+    {
+      "id": 30,
+      "image": "b5d63e8d-061c1a6f.jpg",
+      "label": "b5d63e8d-061c1a6f.txt",
+      "raw_label": "b5d63e8d-061c1a6f.json",
+      "boxes": 6
+    },
+    {
+      "id": 31,
+      "image": "bd51fb57-1ac69b0a.jpg",
+      "label": "bd51fb57-1ac69b0a.txt",
+      "raw_label": "bd51fb57-1ac69b0a.json",
+      "boxes": 9
+    },
+    {
+      "id": 32,
+      "image": "b7831880-0327e785.jpg",
+      "label": "b7831880-0327e785.txt",
+      "raw_label": "b7831880-0327e785.json",
+      "boxes": 6
+    },
+    {
+      "id": 33,
+      "image": "b555790d-59bad5ab.jpg",
+      "label": "b555790d-59bad5ab.txt",
+      "raw_label": "b555790d-59bad5ab.json",
+      "boxes": 17
+    },
+    {
+      "id": 34,
+      "image": "bbc06e30-aa1ed8ea.jpg",
+      "label": "bbc06e30-aa1ed8ea.txt",
+      "raw_label": "bbc06e30-aa1ed8ea.json",
+      "boxes": 8
+    },
+    {
+      "id": 35,
+      "image": "b9ed70c8-edc3834b.jpg",
+      "label": "b9ed70c8-edc3834b.txt",
+      "raw_label": "b9ed70c8-edc3834b.json",
+      "boxes": 19
+    },
+    {
+      "id": 36,
+      "image": "b454034b-d84dae74.jpg",
+      "label": "b454034b-d84dae74.txt",
+      "raw_label": "b454034b-d84dae74.json",
+      "boxes": 17
+    },
+    {
+      "id": 37,
+      "image": "b294386c-24ddd0c3.jpg",
+      "label": "b294386c-24ddd0c3.txt",
+      "raw_label": "b294386c-24ddd0c3.json",
+      "boxes": 21
+    },
+    {
+      "id": 38,
+      "image": "b1d0091f-f2c2d2ae.jpg",
+      "label": "b1d0091f-f2c2d2ae.txt",
+      "raw_label": "b1d0091f-f2c2d2ae.json",
+      "boxes": 20
+    },
+    {
+      "id": 39,
+      "image": "b4863201-6521c146.jpg",
+      "label": "b4863201-6521c146.txt",
+      "raw_label": "b4863201-6521c146.json",
+      "boxes": 12
+    },
+    {
+      "id": 40,
+      "image": "b7d277b3-fc03ae80.jpg",
+      "label": "b7d277b3-fc03ae80.txt",
+      "raw_label": "b7d277b3-fc03ae80.json",
+      "boxes": 16
+    },
+    {
+      "id": 41,
+      "image": "b8afaffa-5ec67bbb.jpg",
+      "label": "b8afaffa-5ec67bbb.txt",
+      "raw_label": "b8afaffa-5ec67bbb.json",
+      "boxes": 13
+    },
+    {
+      "id": 42,
+      "image": "bcfdd6af-698c03e3.jpg",
+      "label": "bcfdd6af-698c03e3.txt",
+      "raw_label": "bcfdd6af-698c03e3.json",
+      "boxes": 24
+    },
+    {
+      "id": 43,
+      "image": "bbc64a91-b3bf5a63.jpg",
+      "label": "bbc64a91-b3bf5a63.txt",
+      "raw_label": "bbc64a91-b3bf5a63.json",
+      "boxes": 17
+    },
+    {
+      "id": 44,
+      "image": "b51daa04-f4e62d2f.jpg",
+      "label": "b51daa04-f4e62d2f.txt",
+      "raw_label": "b51daa04-f4e62d2f.json",
+      "boxes": 5
+    },
+    {
+      "id": 45,
+      "image": "b3875c8d-cc4081eb.jpg",
+      "label": "b3875c8d-cc4081eb.txt",
+      "raw_label": "b3875c8d-cc4081eb.json",
+      "boxes": 16
+    },
+    {
+      "id": 46,
+      "image": "b6818d65-6cfd37c8.jpg",
+      "label": "b6818d65-6cfd37c8.txt",
+      "raw_label": "b6818d65-6cfd37c8.json",
+      "boxes": 9
+    },
+    {
+      "id": 47,
+      "image": "bc470fd9-1cbc318c.jpg",
+      "label": "bc470fd9-1cbc318c.txt",
+      "raw_label": "bc470fd9-1cbc318c.json",
+      "boxes": 17
+    },
+    {
+      "id": 48,
+      "image": "b775af1c-b71a7f85.jpg",
+      "label": "b775af1c-b71a7f85.txt",
+      "raw_label": "b775af1c-b71a7f85.json",
+      "boxes": 31
+    },
+    {
+      "id": 49,
+      "image": "b4253085-9f907156.jpg",
+      "label": "b4253085-9f907156.txt",
+      "raw_label": "b4253085-9f907156.json",
+      "boxes": 12
+    },
+    {
+      "id": 50,
+      "image": "b35c8e3d-bc2c104b.jpg",
+      "label": "b35c8e3d-bc2c104b.txt",
+      "raw_label": "b35c8e3d-bc2c104b.json",
+      "boxes": 19
+    },
+    {
+      "id": 51,
+      "image": "bbfc1b2e-43566392.jpg",
+      "label": "bbfc1b2e-43566392.txt",
+      "raw_label": "bbfc1b2e-43566392.json",
+      "boxes": 14
+    },
+    {
+      "id": 52,
+      "image": "b6579e76-4fee87d1.jpg",
+      "label": "b6579e76-4fee87d1.txt",
+      "raw_label": "b6579e76-4fee87d1.json",
+      "boxes": 40
+    },
+    {
+      "id": 53,
+      "image": "b21bfb83-ea32f716.jpg",
+      "label": "b21bfb83-ea32f716.txt",
+      "raw_label": "b21bfb83-ea32f716.json",
+      "boxes": 44
+    },
+    {
+      "id": 54,
+      "image": "b9047aca-41787983.jpg",
+      "label": "b9047aca-41787983.txt",
+      "raw_label": "b9047aca-41787983.json",
+      "boxes": 31
+    },
+    {
+      "id": 55,
+      "image": "b5d6e647-44af4f17.jpg",
+      "label": "b5d6e647-44af4f17.txt",
+      "raw_label": "b5d6e647-44af4f17.json",
+      "boxes": 21
+    },
+    {
+      "id": 56,
+      "image": "b2f3d83a-1effdb49.jpg",
+      "label": "b2f3d83a-1effdb49.txt",
+      "raw_label": "b2f3d83a-1effdb49.json",
+      "boxes": 53
+    },
+    {
+      "id": 57,
+      "image": "bdd6d823-659f71fd.jpg",
+      "label": "bdd6d823-659f71fd.txt",
+      "raw_label": "bdd6d823-659f71fd.json",
+      "boxes": 16
+    },
+    {
+      "id": 58,
+      "image": "b842809b-9b11bab7.jpg",
+      "label": "b842809b-9b11bab7.txt",
+      "raw_label": "b842809b-9b11bab7.json",
+      "boxes": 7
+    },
+    {
+      "id": 59,
+      "image": "b4ba0552-53249a02.jpg",
+      "label": "b4ba0552-53249a02.txt",
+      "raw_label": "b4ba0552-53249a02.json",
+      "boxes": 19
+    },
+    {
+      "id": 60,
+      "image": "b4b68779-1c75351a.jpg",
+      "label": "b4b68779-1c75351a.txt",
+      "raw_label": "b4b68779-1c75351a.json",
+      "boxes": 26
+    },
+    {
+      "id": 61,
+      "image": "be3301b2-9bb342d3.jpg",
+      "label": "be3301b2-9bb342d3.txt",
+      "raw_label": "be3301b2-9bb342d3.json",
+      "boxes": 23
+    },
+    {
+      "id": 62,
+      "image": "bdba96db-510677bf.jpg",
+      "label": "bdba96db-510677bf.txt",
+      "raw_label": "bdba96db-510677bf.json",
+      "boxes": 25
+    },
+    {
+      "id": 63,
+      "image": "baf019d9-da5f9843.jpg",
+      "label": "baf019d9-da5f9843.txt",
+      "raw_label": "baf019d9-da5f9843.json",
+      "boxes": 23
+    },
+    {
+      "id": 64,
+      "image": "bd7cb9e1-eb5b2227.jpg",
+      "label": "bd7cb9e1-eb5b2227.txt",
+      "raw_label": "bd7cb9e1-eb5b2227.json",
+      "boxes": 6
+    },
+    {
+      "id": 65,
+      "image": "b61212a0-3ddd6209.jpg",
+      "label": "b61212a0-3ddd6209.txt",
+      "raw_label": "b61212a0-3ddd6209.json",
+      "boxes": 11
+    },
+    {
+      "id": 66,
+      "image": "bba45236-0fffd225.jpg",
+      "label": "bba45236-0fffd225.txt",
+      "raw_label": "bba45236-0fffd225.json",
+      "boxes": 6
+    },
+    {
+      "id": 67,
+      "image": "bd442c6f-16ff171d.jpg",
+      "label": "bd442c6f-16ff171d.txt",
+      "raw_label": "bd442c6f-16ff171d.json",
+      "boxes": 9
+    },
+    {
+      "id": 68,
+      "image": "b1d0a191-28f0e779.jpg",
+      "label": "b1d0a191-28f0e779.txt",
+      "raw_label": "b1d0a191-28f0e779.json",
+      "boxes": 23
+    },
+    {
+      "id": 69,
+      "image": "b71bf87d-894c1a21.jpg",
+      "label": "b71bf87d-894c1a21.txt",
+      "raw_label": "b71bf87d-894c1a21.json",
+      "boxes": 20
+    },
+    {
+      "id": 70,
+      "image": "b84146a1-a5f588ef.jpg",
+      "label": "b84146a1-a5f588ef.txt",
+      "raw_label": "b84146a1-a5f588ef.json",
+      "boxes": 28
+    },
+    {
+      "id": 71,
+      "image": "b82366c4-3fb8da58.jpg",
+      "label": "b82366c4-3fb8da58.txt",
+      "raw_label": "b82366c4-3fb8da58.json",
+      "boxes": 16
+    },
+    {
+      "id": 72,
+      "image": "bdaeda37-dfe74a95.jpg",
+      "label": "bdaeda37-dfe74a95.txt",
+      "raw_label": "bdaeda37-dfe74a95.json",
+      "boxes": 4
+    },
+    {
+      "id": 73,
+      "image": "b603f785-de5db004.jpg",
+      "label": "b603f785-de5db004.txt",
+      "raw_label": "b603f785-de5db004.json",
+      "boxes": 54
+    },
+    {
+      "id": 74,
+      "image": "b557283b-51959094.jpg",
+      "label": "b557283b-51959094.txt",
+      "raw_label": "b557283b-51959094.json",
+      "boxes": 15
+    },
+    {
+      "id": 75,
+      "image": "bca3720a-3423755f.jpg",
+      "label": "bca3720a-3423755f.txt",
+      "raw_label": "bca3720a-3423755f.json",
+      "boxes": 6
+    },
+    {
+      "id": 76,
+      "image": "bd290539-038f7b75.jpg",
+      "label": "bd290539-038f7b75.txt",
+      "raw_label": "bd290539-038f7b75.json",
+      "boxes": 23
+    },
+    {
+      "id": 77,
+      "image": "bdde507b-1ce1ac20.jpg",
+      "label": "bdde507b-1ce1ac20.txt",
+      "raw_label": "bdde507b-1ce1ac20.json",
+      "boxes": 16
+    },
+    {
+      "id": 78,
+      "image": "bb820c34-c959c253.jpg",
+      "label": "bb820c34-c959c253.txt",
+      "raw_label": "bb820c34-c959c253.json",
+      "boxes": 28
+    },
+    {
+      "id": 79,
+      "image": "b4c0a877-dff9f7bb.jpg",
+      "label": "b4c0a877-dff9f7bb.txt",
+      "raw_label": "b4c0a877-dff9f7bb.json",
+      "boxes": 13
+    },
+    {
+      "id": 80,
+      "image": "b5b78553-b7c03da2.jpg",
+      "label": "b5b78553-b7c03da2.txt",
+      "raw_label": "b5b78553-b7c03da2.json",
+      "boxes": 7
+    },
+    {
+      "id": 81,
+      "image": "b255cd6c-2f889586.jpg",
+      "label": "b255cd6c-2f889586.txt",
+      "raw_label": "b255cd6c-2f889586.json",
+      "boxes": 42
+    },
+    {
+      "id": 82,
+      "image": "b7bbb1fe-1cec6316.jpg",
+      "label": "b7bbb1fe-1cec6316.txt",
+      "raw_label": "b7bbb1fe-1cec6316.json",
+      "boxes": 6
+    },
+    {
+      "id": 83,
+      "image": "be1ed8ce-38edbe34.jpg",
+      "label": "be1ed8ce-38edbe34.txt",
+      "raw_label": "be1ed8ce-38edbe34.json",
+      "boxes": 24
+    },
+    {
+      "id": 84,
+      "image": "b9b53753-91a5d5f8.jpg",
+      "label": "b9b53753-91a5d5f8.txt",
+      "raw_label": "b9b53753-91a5d5f8.json",
+      "boxes": 25
+    },
+    {
+      "id": 85,
+      "image": "b5b02b31-753a8a4a.jpg",
+      "label": "b5b02b31-753a8a4a.txt",
+      "raw_label": "b5b02b31-753a8a4a.json",
+      "boxes": 15
+    },
+    {
+      "id": 86,
+      "image": "b90f7487-7fb37cf4.jpg",
+      "label": "b90f7487-7fb37cf4.txt",
+      "raw_label": "b90f7487-7fb37cf4.json",
+      "boxes": 11
+    },
+    {
+      "id": 87,
+      "image": "b6ffe7bd-1e0d5145.jpg",
+      "label": "b6ffe7bd-1e0d5145.txt",
+      "raw_label": "b6ffe7bd-1e0d5145.json",
+      "boxes": 7
+    },
+    {
+      "id": 88,
+      "image": "bde48e24-e9aba0dc.jpg",
+      "label": "bde48e24-e9aba0dc.txt",
+      "raw_label": "bde48e24-e9aba0dc.json",
+      "boxes": 13
+    },
+    {
+      "id": 89,
+      "image": "b3d4554c-86182e6e.jpg",
+      "label": "b3d4554c-86182e6e.txt",
+      "raw_label": "b3d4554c-86182e6e.json",
+      "boxes": 7
+    },
+    {
+      "id": 90,
+      "image": "b4e3816e-6cd8a1fe.jpg",
+      "label": "b4e3816e-6cd8a1fe.txt",
+      "raw_label": "b4e3816e-6cd8a1fe.json",
+      "boxes": 8
+    },
+    {
+      "id": 91,
+      "image": "b3e72283-34ebe4f5.jpg",
+      "label": "b3e72283-34ebe4f5.txt",
+      "raw_label": "b3e72283-34ebe4f5.json",
+      "boxes": 19
+    },
+    {
+      "id": 92,
+      "image": "b8d24edf-70279ee0.jpg",
+      "label": "b8d24edf-70279ee0.txt",
+      "raw_label": "b8d24edf-70279ee0.json",
+      "boxes": 11
+    },
+    {
+      "id": 93,
+      "image": "b3bc36c8-03cb07d2.jpg",
+      "label": "b3bc36c8-03cb07d2.txt",
+      "raw_label": "b3bc36c8-03cb07d2.json",
+      "boxes": 6
+    },
+    {
+      "id": 94,
+      "image": "b48c7b5f-ae58463a.jpg",
+      "label": "b48c7b5f-ae58463a.txt",
+      "raw_label": "b48c7b5f-ae58463a.json",
+      "boxes": 4
+    },
+    {
+      "id": 95,
+      "image": "b7ea55c1-8385ec70.jpg",
+      "label": "b7ea55c1-8385ec70.txt",
+      "raw_label": "b7ea55c1-8385ec70.json",
+      "boxes": 20
+    },
+    {
+      "id": 96,
+      "image": "b8c0457f-d7a1d2b7.jpg",
+      "label": "b8c0457f-d7a1d2b7.txt",
+      "raw_label": "b8c0457f-d7a1d2b7.json",
+      "boxes": 16
+    },
+    {
+      "id": 97,
+      "image": "b49a1b50-186fb520.jpg",
+      "label": "b49a1b50-186fb520.txt",
+      "raw_label": "b49a1b50-186fb520.json",
+      "boxes": 5
+    },
+    {
+      "id": 98,
+      "image": "b6b9069a-4908df6a.jpg",
+      "label": "b6b9069a-4908df6a.txt",
+      "raw_label": "b6b9069a-4908df6a.json",
+      "boxes": 21
+    },
+    {
+      "id": 99,
+      "image": "b6e4a55e-4a7068f1.jpg",
+      "label": "b6e4a55e-4a7068f1.txt",
+      "raw_label": "b6e4a55e-4a7068f1.json",
+      "boxes": 5
+    }
+  ]
+}

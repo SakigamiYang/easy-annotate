@@ -1,4 +1,5 @@
 path: /Users/z.yang/playground/easy-annotate/datasets/bdd100k-road
+train: images/val
 val: images/val
 names:
   0: person

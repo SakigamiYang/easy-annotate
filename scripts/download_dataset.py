@@ -223,6 +223,7 @@ def main():
     # Ultralytics evaluation configuration
     config = {
         "path": str(DATASET_DIR.resolve()),
+        "train": "images/val",
         "val": "images/val",
         "names": dict(enumerate(CLASS_NAMES)),
     }

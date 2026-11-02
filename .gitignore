@@ -31,13 +31,5 @@ logs/*
 # thumbnail cache on Windows
 Thumbs.db
 
-# data
-data/*
-!data/demo
-!data/raw/ROIs0000_test
-!data/raw/ROIs0000_test/.gitkeep
-!data/raw/ROIs0000_validation
-!data/raw/ROIs0000_validation/.gitkeep
-
 # env
 .env

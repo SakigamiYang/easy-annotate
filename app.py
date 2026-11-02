@@ -1,14 +1,23 @@
-"""EasyAnnotate: lightweight AI-assisted image annotation."""
+"""EasyAnnotate: AI-assisted image annotation."""
 
 import hashlib
 import io
 from copy import deepcopy
 
 import streamlit as st
-from loguru import logger
 from PIL import Image
+from loguru import logger
+from streamlit_drawable_canvas import (
+    boxes_to_drawing,
+    st_canvas,
+)
+
 from easy_annotate.detector import detect_objects
-from streamlit_drawable_canvas import st_canvas
+from easy_annotate.exporter import export_yolo
+from easy_annotate.storage import (
+    load_annotations,
+    save_annotations,
+)
 
 CLASS_NAMES = [
     "person",
@@ -32,15 +41,15 @@ st.set_page_config(
 )
 
 
-def initialize_state():
-    """Initialize application state."""
+def init_state():
     defaults = {
         "image_id": None,
-        "canvas_version": 0,
         "drawing": {"objects": []},
+        "canvas_initial": {"objects": []},
+        "canvas_version": 0,
+        "pending_canvas_update": False,
         "mode": "Manual",
         "prediction_count": None,
-        "pending_canvas_update": False,
     }
 
     for key, value in defaults.items():
@@ -48,56 +57,48 @@ def initialize_state():
             st.session_state[key] = deepcopy(value)
 
 
-def make_drawing(boxes, scale_x, scale_y):
-    """Convert image-space boxes into editable canvas objects."""
-    objects = []
-
-    for box in boxes:
-        x1 = box["x1"] / scale_x
-        y1 = box["y1"] / scale_y
-        x2 = box["x2"] / scale_x
-        y2 = box["y2"] / scale_y
-
-        objects.append({
-            "type": "LabeledRect",
-            "label": box["class"],
-            "left": x1,
-            "top": y1,
-            "width": x2 - x1,
-            "height": y2 - y1,
-            "originX": "left",
-            "originY": "top",
-            "scaleX": 1,
-            "scaleY": 1,
-            "angle": 0,
-            "stroke": "#00FF00",
-            "strokeWidth": 2,
-            "fill": "rgba(0, 255, 0, 0.08)",
-            "lockRotation": True,
-            "strokeUniform": True,
-        })
-
-    return {"objects": objects}
+def reset_canvas():
+    """Remount Canvas after programmatic changes."""
+    st.session_state.canvas_initial = deepcopy(
+        st.session_state.drawing
+    )
+    st.session_state.canvas_version += 1
+    st.session_state.pending_canvas_update = True
 
 
-def extract_annotations(drawing, scale_x, scale_y, image_size):
-    """Extract labeled rectangles in original image coordinates."""
-    if not drawing:
-        return []
+def canvas_objects(drawing):
+    """Get labeled rectangles from Fabric canvas JSON."""
+    return [
+        obj
+        for obj in drawing.get("objects", [])
+        if obj.get("type", "").lower()
+           in {"labeledrect", "rect"}
+    ]
 
+
+def canvas_signature(drawing):
+    """Identify canvas contents during initialization."""
+    return [
+        (
+            obj.get("type"),
+            obj.get("label"),
+            round(float(obj.get("left", 0)), 2),
+            round(float(obj.get("top", 0)), 2),
+            round(float(obj.get("width", 0)), 2),
+            round(float(obj.get("height", 0)), 2),
+        )
+        for obj in canvas_objects(drawing)
+    ]
+
+
+def get_annotations(drawing, sx, sy, image_size):
+    """Convert canvas objects to original image coordinates."""
     image_width, image_height = image_size
     annotations = []
 
-    for obj in drawing.get("objects", []):
-        if obj.get("type", "").lower() not in {
-            "labeledrect",
-            "rect",
-        }:
-            continue
-
+    for obj in canvas_objects(drawing):
         left = float(obj.get("left", 0))
         top = float(obj.get("top", 0))
-
         width = (
                 float(obj.get("width", 0))
                 * float(obj.get("scaleX", 1))
@@ -107,21 +108,18 @@ def extract_annotations(drawing, scale_x, scale_y, image_size):
                 * float(obj.get("scaleY", 1))
         )
 
-        x1 = min(left, left + width) * scale_x
-        y1 = min(top, top + height) * scale_y
-        x2 = max(left, left + width) * scale_x
-        y2 = max(top, top + height) * scale_y
-
-        x1 = max(0, min(x1, image_width))
-        x2 = max(0, min(x2, image_width))
-        y1 = max(0, min(y1, image_height))
-        y2 = max(0, min(y2, image_height))
+        x1 = max(0, min(min(left, left + width) * sx, image_width))
+        y1 = max(0, min(min(top, top + height) * sy, image_height))
+        x2 = max(0, min(max(left, left + width) * sx, image_width))
+        y2 = max(0, min(max(top, top + height) * sy, image_height))
 
         if x2 <= x1 or y2 <= y1:
             continue
 
+        label = obj.get("label", "car")
+
         annotations.append({
-            "class": obj.get("label") or "car",
+            "class": label if label in CLASS_NAMES else "car",
             "x1": round(x1, 2),
             "y1": round(y1, 2),
             "x2": round(x2, 2),
@@ -131,14 +129,37 @@ def extract_annotations(drawing, scale_x, scale_y, image_size):
     return annotations
 
 
-def main():
-    initialize_state()
+def predictions_to_drawing(predictions, sx, sy):
+    """Convert YOLO predictions to labeled Canvas objects."""
+    boxes = []
 
+    for prediction in predictions:
+        boxes.append({
+            "label": prediction["class"],
+            "left": prediction["x1"] / sx,
+            "top": prediction["y1"] / sy,
+            "width": (
+                             prediction["x2"] - prediction["x1"]
+                     ) / sx,
+            "height": (
+                              prediction["y2"] - prediction["y1"]
+                      ) / sy,
+        })
+
+    return boxes_to_drawing(
+        boxes,
+        stroke_color="#00FF00",
+        stroke_width=2,
+        fill_color="rgba(0, 255, 0, 0.08)",
+    )
+
+
+def main():
+    init_state()
     st.title("EasyAnnotate")
 
     with st.sidebar:
         st.header("Image")
-
         uploaded_file = st.file_uploader(
             "Upload an image",
             type=["jpg", "jpeg", "png"],
@@ -150,32 +171,33 @@ def main():
 
     image_bytes = uploaded_file.getvalue()
     image_id = hashlib.sha256(image_bytes).hexdigest()[:16]
+    image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+
+    width, height = image.size
+    scale = min(MAX_CANVAS_WIDTH / width, 1.0)
+    canvas_width = max(1, round(width * scale))
+    canvas_height = max(1, round(height * scale))
+
+    sx = width / canvas_width
+    sy = height / canvas_height
 
     if st.session_state.image_id != image_id:
         st.session_state.image_id = image_id
         st.session_state.drawing = {"objects": []}
-        st.session_state.canvas_version += 1
         st.session_state.mode = "Manual"
         st.session_state.prediction_count = None
 
-    image = Image.open(
-        io.BytesIO(image_bytes)
-    ).convert("RGB")
+        saved = load_annotations(image_id)
 
-    original_width, original_height = image.size
+        if saved:
+            st.session_state.drawing = saved["drawing"]
+            logger.info("Restored annotations for {}", image_id)
 
-    scale = min(MAX_CANVAS_WIDTH / original_width, 1.0)
-    canvas_width = max(1, round(original_width * scale))
-    canvas_height = max(1, round(original_height * scale))
-
-    scale_x = original_width / canvas_width
-    scale_y = original_height / canvas_height
+        reset_canvas()
 
     with st.sidebar:
-        st.caption(f"Filename: {uploaded_file.name}")
-        st.caption(
-            f"Resolution: {original_width} × {original_height}"
-        )
+        st.caption(uploaded_file.name)
+        st.caption(f"{width} × {height}")
 
         st.divider()
         st.header("Annotation")
@@ -184,8 +206,6 @@ def main():
             "Class for new boxes",
             options=CLASS_NAMES,
             index=2,
-            accept_new_options=False,
-            filter_mode=None,
         )
 
         st.divider()
@@ -196,46 +216,29 @@ def main():
                 type="primary",
                 use_container_width=True,
         ):
-            logger.info("Auto Annotate clicked: image={}", uploaded_file.name)
+            logger.info("Auto annotation started: {}", uploaded_file.name)
 
             try:
                 with st.spinner("Detecting objects..."):
                     predictions = detect_objects(image)
 
+                st.session_state.drawing = predictions_to_drawing(
+                    predictions, sx, sy
+                )
+                st.session_state.prediction_count = len(predictions)
+                st.session_state.mode = "AI-Assisted"
+
                 logger.info(
-                    "Predictions received: count={}",
+                    "Auto annotation finished: {} boxes",
                     len(predictions),
                 )
 
-                drawing = make_drawing(
-                    predictions,
-                    scale_x,
-                    scale_y,
-                )
-
-                logger.info(
-                    "Canvas drawing generated: objects={}",
-                    len(drawing["objects"]),
-                )
-
-                st.session_state.drawing = drawing
-                st.session_state.prediction_count = len(predictions)
-                st.session_state.mode = "AI-Assisted"
-                st.session_state.canvas_version += 1
-
-                # Keep track of pending AI annotations.
-                st.session_state.pending_canvas_update = True
-
-                logger.info(
-                    "Session state updated: canvas_version={}",
-                    st.session_state.canvas_version,
-                )
-
+                reset_canvas()
                 st.rerun()
 
             except Exception:
                 logger.exception("Auto annotation failed")
-                st.error("Auto annotation failed. Check terminal logs.")
+                st.error("Detection failed. Check terminal logs.")
 
         if st.session_state.prediction_count is not None:
             st.caption(
@@ -243,21 +246,12 @@ def main():
                 f"{st.session_state.prediction_count} boxes."
             )
 
-    left_col, right_col = st.columns(
-        [3, 1],
-        gap="large",
-    )
+    left_col, right_col = st.columns([3, 1], gap="large")
 
     with left_col:
         st.subheader("Image Annotation")
 
-        logger.debug(
-            "Rendering canvas: key_version={}, stored_objects={}",
-            st.session_state.canvas_version,
-            len(st.session_state.drawing.get("objects", [])),
-        )
-
-        canvas_result = st_canvas(
+        result = st_canvas(
             background_image=image,
             background_image_fit="stretch",
             drawing_mode="labeled_rect",
@@ -269,72 +263,82 @@ def main():
             height=canvas_height,
             update_streamlit=True,
             return_image_data=False,
-            initial_drawing=st.session_state.drawing,
+            initial_drawing=st.session_state.canvas_initial,
             key=(
                 f"canvas_{image_id}_"
                 f"{st.session_state.canvas_version}"
             ),
         )
 
-    canvas_data = canvas_result.json_data
+    canvas_data = result.json_data
 
-    if st.session_state.get("pending_canvas_update", False):
-        expected = len(st.session_state.drawing.get("objects", []))
-        actual = (
-            len(canvas_data.get("objects", []))
-            if canvas_data is not None
-            else None
-        )
-
-        logger.info(
-            "Waiting for canvas initialization: expected={}, actual={}",
-            expected,
-            actual,
-        )
-
+    if st.session_state.pending_canvas_update:
         if (
                 canvas_data is not None
-                and len(canvas_data.get("objects", [])) == expected
+                and canvas_signature(canvas_data)
+                == canvas_signature(st.session_state.canvas_initial)
         ):
+            st.session_state.drawing = deepcopy(canvas_data)
             st.session_state.pending_canvas_update = False
-            st.session_state.drawing = canvas_data
-            logger.info("Canvas initialization completed")
+            logger.debug("Canvas initialized successfully")
 
     elif canvas_data is not None:
-        st.session_state.drawing = canvas_data
+        st.session_state.drawing = deepcopy(canvas_data)
 
-        logger.debug(
-            "Canvas updated: objects={}",
-            len(canvas_data.get("objects", [])),
-        )
-
-    annotations = extract_annotations(
+    objects = canvas_objects(st.session_state.drawing)
+    annotations = get_annotations(
         st.session_state.drawing,
-        scale_x,
-        scale_y,
+        sx,
+        sy,
         image.size,
     )
 
     with right_col:
         st.subheader("Annotations")
-
         st.caption(f"Mode: {st.session_state.mode}")
         st.metric("Total Boxes", len(annotations))
 
-        # Scrollable annotation list
         with st.container(height=450, border=False):
-            for index, annotation in enumerate(annotations):
+            for index, obj in enumerate(objects):
+                label = obj.get("label", "car")
+                if label not in CLASS_NAMES:
+                    label = "car"
+
                 with st.container(border=True):
-                    st.write(
-                        f"**{index + 1}. {annotation['class']}**"
+                    st.markdown(f"**Box {index + 1}**")
+
+                    new_label = st.selectbox(
+                        "Class",
+                        options=CLASS_NAMES,
+                        index=CLASS_NAMES.index(label),
+                        key=(
+                            f"label_{image_id}_"
+                            f"{st.session_state.canvas_version}_"
+                            f"{index}"
+                        ),
                     )
 
-                    st.caption(
-                        f"({annotation['x1']:.0f}, "
-                        f"{annotation['y1']:.0f}) → "
-                        f"({annotation['x2']:.0f}, "
-                        f"{annotation['y2']:.0f})"
-                    )
+                    if new_label != label:
+                        obj["label"] = new_label
+                        reset_canvas()
+                        st.rerun()
+
+                    if st.button(
+                            "Delete",
+                            key=f"delete_{image_id}_{index}",
+                            use_container_width=True,
+                    ):
+                        st.session_state.drawing["objects"].remove(obj)
+                        logger.info("Deleted box {}", index + 1)
+                        reset_canvas()
+                        st.rerun()
+
+                    if index < len(annotations):
+                        box = annotations[index]
+                        st.caption(
+                            f"({box['x1']:.0f}, {box['y1']:.0f}) → "
+                            f"({box['x2']:.0f}, {box['y2']:.0f})"
+                        )
 
         if st.button(
                 "Clear All",
@@ -343,8 +347,41 @@ def main():
             st.session_state.drawing = {"objects": []}
             st.session_state.prediction_count = None
             st.session_state.mode = "Manual"
-            st.session_state.canvas_version += 1
+            reset_canvas()
             st.rerun()
+
+        if st.button(
+                "Save Annotations",
+                type="primary",
+                use_container_width=True,
+        ):
+            buffer = io.BytesIO()
+            image.save(buffer, format="PNG")
+
+            path = save_annotations(
+                image_id=image_id,
+                filename=uploaded_file.name,
+                image_bytes=buffer.getvalue(),
+                image_size=image.size,
+                canvas_size=(canvas_width, canvas_height),
+                drawing=st.session_state.drawing,
+                annotations=annotations,
+            )
+
+            st.success(f"Saved {len(annotations)} boxes")
+            logger.info("Annotations saved: {}", path)
+
+        st.download_button(
+            "Export ZIP",
+            data=export_yolo(
+                image=image,
+                annotations=annotations,
+                filename=uploaded_file.name,
+            ),
+            file_name="annotations.zip",
+            mime="application/zip",
+            use_container_width=True,
+        )
 
     if annotations:
         with st.expander("Annotation Data"):
